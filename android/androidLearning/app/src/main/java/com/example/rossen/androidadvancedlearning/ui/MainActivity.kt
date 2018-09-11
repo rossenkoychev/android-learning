@@ -1,9 +1,9 @@
 package com.example.rossen.androidadvancedlearning.ui
 
-import android.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.rossen.androidadvancedlearning.R
+import com.example.rossen.androidadvancedlearning.data.AndroidImageAssets
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,11 +11,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bodyPartFragment=BodyPartFragment()
-        val fragmentManager=getSupportFragmentManager()
+        if (savedInstanceState == null) {
+            val fragmentManager = getSupportFragmentManager()
 
-        fragmentManager.beginTransaction()
-                .add(R.id.head_container,bodyPartFragment)
-                .commit()
+            val headFragment = BodyPartFragment()
+            headFragment.imageIds = AndroidImageAssets.heads
+            headFragment.listIndex = 1
+            val bodyFragment = BodyPartFragment()
+            bodyFragment.imageIds = AndroidImageAssets.bodies
+            bodyFragment.listIndex = 1
+            val legsFragment = BodyPartFragment()
+            legsFragment.imageIds = AndroidImageAssets.legs
+            legsFragment.listIndex = 1
+            fragmentManager.beginTransaction()
+                    .add(R.id.head_container, headFragment)
+                    .add(R.id.body_container, bodyFragment)
+                    .add(R.id.legs_container, legsFragment)
+                    .commit()
+
+        }
     }
 }
