@@ -16,8 +16,8 @@ class BodyPartFragment() : Fragment() {
 
     companion object {
         private val TAG = BodyPartFragment::class.qualifiedName
-        private val IMAGE_ID_LIST="image ids"
-        private val LIST_INDEX="list index"
+        private const val IMAGE_ID_LIST="image ids"
+        private const val LIST_INDEX="list index"
     }
 
     var imageIds:List<Int> = listOf()
