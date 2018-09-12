@@ -1,5 +1,6 @@
 package com.example.rossen.androidadvancedlearning.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,10 +12,20 @@ import com.example.rossen.androidadvancedlearning.data.AndroidImageAssets
 
 class MasterListFragment : Fragment() {
 
-    lateinit var onImageClickListener:OnImageClickListener
+    lateinit var callBack:OnImageClickListener
 
     interface OnImageClickListener {
         fun onImageSelected(position:Int)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        try{
+            callBack=context as OnImageClickListener
+        }catch ( e:ClassCastException){
+            throw ClassCastException(context.toString() + "must implement OnImageClickListener")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,6 +34,8 @@ class MasterListFragment : Fragment() {
         val adapter=MasterListAdapter(context!!,AndroidImageAssets.all)
         val gridView: GridView = rootView.findViewById(R.id.master_grid_view)
         gridView.adapter=adapter
+
+        gridView.setOnItemClickListener { parent, view, position, id ->  callBack.onImageSelected(position)}
         return rootView
     }
 }
