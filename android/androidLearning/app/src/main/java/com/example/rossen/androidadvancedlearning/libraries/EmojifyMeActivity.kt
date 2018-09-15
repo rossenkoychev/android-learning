@@ -13,38 +13,18 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.example.rossen.androidadvancedlearning.R
+import kotlinx.android.synthetic.main.activity_main_libraries.*
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
 
-class EmojifyMeActivity :AppCompatActivity(){
+class EmojifyMeActivity : AppCompatActivity() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_STORAGE_PERMISSION = 1
 
     private val FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider"
-
-    @BindView(R.id.image_view)
-    internal lateinit var mImageView: ImageView
-
-    @BindView(R.id.emojify_button)
-    internal lateinit var mEmojifyButton: Button
-    @BindView(R.id.share_button)
-    internal lateinit var mShareFab: FloatingActionButton
-    @BindView(R.id.save_button)
-    internal lateinit var mSaveFab: FloatingActionButton
-    @BindView(R.id.clear_button)
-    internal lateinit var  mClearFab: FloatingActionButton
-
-    @BindView(R.id.title_text_view)
-    internal lateinit var mTitleTextView: TextView
 
     private lateinit var mTempPhotoPath: String
 
@@ -55,30 +35,57 @@ class EmojifyMeActivity :AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_libraries)
 
-        // Bind the views
-        ButterKnife.bind(this)
-
         // Set up Timber
         Timber.plant(Timber.DebugTree())
+
+        initListeners()
     }
 
-    /**
-     * OnClick method for "Emojify Me!" Button. Launches the camera app.
-     */
-    @OnClick(R.id.emojify_button)
-    fun emojifyMe() {
-        // Check for the external storage permission
-        if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+    private fun initListeners() {
+        save_button.setOnClickListener {
+            // Delete the temporary image file
+            BitmapUtils.deleteImageFile(this, mTempPhotoPath)
 
-            // If you do not have permission, request it
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_STORAGE_PERMISSION)
-        } else {
-            // Launch the camera if the permission exists
-            launchCamera()
+            // Save the image
+            BitmapUtils.saveImage(this, mResultsBitmap)
         }
+
+        share_button.setOnClickListener {
+            BitmapUtils.deleteImageFile(this, mTempPhotoPath)
+
+            // Save the image
+            BitmapUtils.saveImage(this, mResultsBitmap)
+
+            // Share the image
+            BitmapUtils.shareImage(this, mTempPhotoPath)
+        }
+
+        emojify_button.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                // If you do not have permission, request it
+                ActivityCompat.requestPermissions(this,
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        REQUEST_STORAGE_PERMISSION)
+            } else {
+                // Launch the camera if the permission exists
+                launchCamera()
+            }
+        }
+
+        clear_button.setOnClickListener {
+            image_view.setImageResource(0)
+            emojify_button.visibility = View.VISIBLE
+            title_text_view.visibility = View.VISIBLE
+            share_button.visibility = View.GONE
+            save_button.visibility = View.GONE
+            clear_button.visibility = View.GONE
+
+            // Delete the temporary image file
+            BitmapUtils.deleteImageFile(this, mTempPhotoPath)
+        }
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
@@ -133,7 +140,7 @@ class EmojifyMeActivity :AppCompatActivity(){
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // If the image capture activity was called and was successful
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             // Process the image and set it to the TextView
@@ -151,65 +158,21 @@ class EmojifyMeActivity :AppCompatActivity(){
     private fun processAndSetImage() {
 
         // Toggle Visibility of the views
-        mEmojifyButton.visibility = View.GONE
-        mTitleTextView.visibility = View.GONE
-        mSaveFab.visibility = View.VISIBLE
-        mShareFab.visibility = View.VISIBLE
-        mClearFab.visibility = View.VISIBLE
+        emojify_button.visibility = View.GONE
+        title_text_view.visibility = View.GONE
+        save_button.visibility = View.VISIBLE
+        share_button.visibility = View.VISIBLE
+        clear_button.visibility = View.VISIBLE
 
         // Resample the saved image to fit the ImageView
         mResultsBitmap = BitmapUtils.resamplePic(this, mTempPhotoPath)
 
 
         // Detect the faces and overlay the appropriate emoji
-      //  mResultsBitmap = Emojifier.detectFacesandOverlayEmoji(this, mResultsBitmap)
+       mResultsBitmap= Emojifier.detectFaces(this,mResultsBitmap)
+        //  mResultsBitmap = Emojifier.detectFacesandOverlayEmoji(this, mResultsBitmap)
 
         // Set the new bitmap to the ImageView
-        mImageView.setImageBitmap(mResultsBitmap)
-    }
-
-
-    /**
-     * OnClick method for the save button.
-     */
-    @OnClick(R.id.save_button)
-    fun saveMe() {
-        // Delete the temporary image file
-        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
-
-        // Save the image
-        BitmapUtils.saveImage(this, mResultsBitmap)
-    }
-
-    /**
-     * OnClick method for the share button, saves and shares the new bitmap.
-     */
-    @OnClick(R.id.share_button)
-    fun shareMe() {
-        // Delete the temporary image file
-        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
-
-        // Save the image
-        BitmapUtils.saveImage(this, mResultsBitmap)
-
-        // Share the image
-        BitmapUtils.shareImage(this, mTempPhotoPath)
-    }
-
-    /**
-     * OnClick for the clear button, resets the app to original state.
-     */
-    @OnClick(R.id.clear_button)
-    fun clearImage() {
-        // Clear the image and toggle the view visibility
-        mImageView.setImageResource(0)
-        mEmojifyButton.visibility = View.VISIBLE
-        mTitleTextView.visibility = View.VISIBLE
-        mShareFab.visibility = View.GONE
-        mSaveFab.visibility = View.GONE
-        mClearFab.visibility = View.GONE
-
-        // Delete the temporary image file
-        BitmapUtils.deleteImageFile(this, mTempPhotoPath)
+        image_view.setImageBitmap(mResultsBitmap)
     }
 }
