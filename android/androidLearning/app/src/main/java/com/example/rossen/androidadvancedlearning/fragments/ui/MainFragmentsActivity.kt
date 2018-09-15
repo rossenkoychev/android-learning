@@ -1,4 +1,4 @@
-package com.example.rossen.androidadvancedlearning.ui
+package com.example.rossen.androidadvancedlearning.fragments.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,32 +8,32 @@ import android.widget.Button
 import android.widget.GridView
 import android.widget.Toast
 import com.example.rossen.androidadvancedlearning.R
-import com.example.rossen.androidadvancedlearning.data.AndroidImageAssets
+import com.example.rossen.androidadvancedlearning.fragments.data.AndroidImageAssets
 
-class MainActivity : AppCompatActivity(), MasterListFragment.OnImageClickListener {
+class MainFragmentsActivity : AppCompatActivity(), MasterListFragment.OnImageClickListener {
 
     var headIndex: Int = 0
     var bodyIndex: Int = 0
     var legIndex: Int = 0
-    lateinit var androidMeIntent:Intent
+    lateinit var androidMeIntent: Intent
     lateinit var buttonNext: Button
-    var twoPane:Boolean=false
-   lateinit var headFragment :BodyPartFragment
-    lateinit var bodyFragment :BodyPartFragment
-    lateinit var legsFragment :BodyPartFragment
+    var twoPane: Boolean = false
+    lateinit var headFragment: BodyPartFragment
+    lateinit var bodyFragment: BodyPartFragment
+    lateinit var legsFragment: BodyPartFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_fragments_main)
         buttonNext = findViewById(R.id.next_button)
-        if(findViewById<View>(R.id.android_me_linear_layout)!=null) {
-            twoPane=true
+        if (findViewById<View>(R.id.android_me_linear_layout) != null) {
+            twoPane = true
             if (savedInstanceState == null) {
 
                 headFragment = BodyPartFragment()
                 headFragment.imageIds = AndroidImageAssets.heads
                 headFragment.listIndex = headIndex
-                 bodyFragment = BodyPartFragment()
+                bodyFragment = BodyPartFragment()
                 bodyFragment.imageIds = AndroidImageAssets.bodies
                 bodyFragment.listIndex = bodyIndex
                 legsFragment = BodyPartFragment()
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity(), MasterListFragment.OnImageClickListene
                         .add(R.id.legs_container, legsFragment, AndroidMeActivity.LEG_INDEX)
                         .commit()
             }
-            buttonNext.visibility=View.GONE
-            val gridView=findViewById(R.id.master_grid_view) as GridView
-            gridView.numColumns=2
+            buttonNext.visibility = View.GONE
+            val gridView = findViewById(R.id.master_grid_view) as GridView
+            gridView.numColumns = 2
 
         }
 
@@ -73,20 +73,29 @@ class MainActivity : AppCompatActivity(), MasterListFragment.OnImageClickListene
         }
 
 
-        if(twoPane){
+        if (twoPane) {
             when (bodyPartNumber) {
-                0 -> headFragment.listIndex = listIndex
-                1 -> bodyFragment.listIndex=listIndex
-                2 -> legsFragment.listIndex=listIndex
+                0 -> {
+                    headFragment.listIndex = listIndex
+                    headFragment.updateView()
+                }
+                1 -> {
+                    bodyFragment.listIndex = listIndex
+                    bodyFragment.updateView()
+                }
+                2 -> {
+                    legsFragment.listIndex = listIndex
+                    legsFragment.updateView()
+                }
             }
-        }else{
-        val bundle = Bundle()
-        bundle.putInt(AndroidMeActivity.BODY_INDEX, bodyIndex)
-        bundle.putInt(AndroidMeActivity.HEAD_INDEX, headIndex)
-        bundle.putInt(AndroidMeActivity.LEG_INDEX, legIndex)
+        } else {
+            val bundle = Bundle()
+            bundle.putInt(AndroidMeActivity.BODY_INDEX, bodyIndex)
+            bundle.putInt(AndroidMeActivity.HEAD_INDEX, headIndex)
+            bundle.putInt(AndroidMeActivity.LEG_INDEX, legIndex)
 
-        androidMeIntent.putExtras(bundle)
-        buttonNext.setOnClickListener { startActivity(androidMeIntent) }
+            androidMeIntent.putExtras(bundle)
+            buttonNext.setOnClickListener { startActivity(androidMeIntent) }
         }
 
     }

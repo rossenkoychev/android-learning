@@ -1,9 +1,9 @@
-package com.example.rossen.androidadvancedlearning.ui
+package com.example.rossen.androidadvancedlearning.fragments.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.rossen.androidadvancedlearning.R
-import com.example.rossen.androidadvancedlearning.data.AndroidImageAssets
+import com.example.rossen.androidadvancedlearning.fragments.data.AndroidImageAssets
 
 class AndroidMeActivity : AppCompatActivity() {
     companion object {

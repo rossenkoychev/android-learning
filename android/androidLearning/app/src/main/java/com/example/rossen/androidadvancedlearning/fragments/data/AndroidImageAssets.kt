@@ -1,4 +1,4 @@
-package com.example.rossen.androidadvancedlearning.data
+package com.example.rossen.androidadvancedlearning.fragments.data
 
 import com.example.rossen.androidadvancedlearning.R
 

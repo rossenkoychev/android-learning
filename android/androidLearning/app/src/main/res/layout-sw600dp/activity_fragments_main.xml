@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.rossen.androidadvancedlearning.ui.MainActivity">
+    tools:context=".fragments.ui.MainFragmentsActivity">
 
     <fragment
         android:id="@+id/master_list_fragment"
-        android:name="com.example.rossen.androidadvancedlearning.ui.MasterListFragment"
+        android:name="com.example.rossen.androidadvancedlearning.fragments.ui.MasterListFragment"
         android:layout_width="400dp"
         android:layout_height="match_parent"/>
 

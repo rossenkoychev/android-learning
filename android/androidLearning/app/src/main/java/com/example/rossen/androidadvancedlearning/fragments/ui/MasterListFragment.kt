@@ -1,4 +1,4 @@
-package com.example.rossen.androidadvancedlearning.ui
+package com.example.rossen.androidadvancedlearning.fragments.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import com.example.rossen.androidadvancedlearning.R
-import com.example.rossen.androidadvancedlearning.data.AndroidImageAssets
+import com.example.rossen.androidadvancedlearning.fragments.data.AndroidImageAssets
 
 class MasterListFragment : Fragment() {
 
