@@ -32,7 +32,7 @@ class MasterListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_master_list, container, false)
 
         val adapter=MasterListAdapter(context!!,AndroidImageAssets.all)
-        val gridView: GridView = rootView.findViewById(R.id.master_grid_view)
+        val gridView: GridView = rootView.findViewById<GridView>(R.id.master_grid_view)
         gridView.adapter=adapter
 
         gridView.setOnItemClickListener { parent, view, position, id ->  callBack.onImageSelected(position)}

@@ -36,6 +36,14 @@
         <activity android:name="com.example.rossen.androidadvancedlearning.fragments.ui.MainFragmentsActivity"/>
 
         <activity android:name=".libraries.EmojifyMeActivity"/>
+        <activity android:name=".squaker_cloud.MainSquakerActivity"/>
+        <activity android:name=".squaker_cloud.following.FollowingPreferenceActivity" />
+
+        <service android:name=".squaker_cloud.fcm.SquawkFirebaseMessageService" >
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+        </service>
     </application>
 
 </manifest>
