@@ -3,6 +3,7 @@ package com.example.rossen.androidadvancedlearning.mainpackage
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.example.rossen.androidadvancedlearning.R
 import com.example.rossen.androidadvancedlearning.fragments.ui.MainFragmentsActivity
 import com.example.rossen.androidadvancedlearning.libraries.EmojifyMeActivity
@@ -29,6 +30,12 @@ class MainActivity:Activity() {
             val push_messages_intent=Intent(this,MainSquakerActivity::class.java)
             startActivity(push_messages_intent)
         }
+
+        var extras:Bundle?=intent.extras
+        Log.d(LOG_TAG, "Contains ${extras?.getString("test")}")
+    }
+    companion object {
+        private val LOG_TAG = MainActivity::class.java.simpleName
     }
 
 }

@@ -30,7 +30,7 @@ import net.simonvt.schematic.annotation.TableEndpoint
 @ContentProvider(authority = SquawkProvider.AUTHORITY, database = SquawkDatabase::class)
 object SquawkProvider {
 
-    const val AUTHORITY = "android.example.com.squawker.provider.provider"
+    const val AUTHORITY = "com.example.rossen.androidadvancedlearning.squaker_cloud.provider.SquawkProvider"
 
 
     @TableEndpoint(table = SquawkDatabase.SQUAWK_MESSAGES)

@@ -25,16 +25,16 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/lyla" />
+        android:src="@drawable/lyla"
+        android:contentDescription="@string/no_desctiption"/>
 
     <TextView
         android:id="@+id/author_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/author_image_view"
+        android:layout_toEndOf="@id/author_image_view"
         android:fontFamily="sans-serif-medium"
         android:paddingEnd="8dp"
-        android:paddingLeft="8dp"
         android:paddingStart="8dp"
         android:textColor="@color/colorText"
         android:textSize="14sp" />
@@ -43,7 +43,7 @@
         android:id="@+id/date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/author_text_view"
+        android:layout_toEndOf="@id/author_text_view"
         android:textColor="@color/colorSecondaryText"
         android:textStyle="italic" />
 
@@ -52,10 +52,9 @@
         android:id="@+id/message_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/author_text_view"
+        android:layout_alignStart="@id/author_text_view"
         android:layout_below="@id/author_text_view"
         android:paddingEnd="8dp"
-        android:paddingLeft="8dp"
         android:paddingStart="8dp"
         android:textColor="@color/colorText"
         android:textSize="14sp" />

@@ -11,6 +11,6 @@
  limitations under the License.-->
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_settings"
-    android:name="com"
+    android:name="com.example.rossen.androidadvancedlearning.squaker_cloud.following.FollowingPreferenceFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

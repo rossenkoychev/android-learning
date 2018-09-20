@@ -44,11 +44,11 @@ class SquawkAdapter : RecyclerView.Adapter<SquawkAdapter.SquawkViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SquawkViewHolder, position: Int) {
-        mData!!.moveToPosition(position)
+        mData?.moveToPosition(position)
 
-        val message = mData!!.getString(MainSquakerActivity.COL_NUM_MESSAGE)
-        val author = mData!!.getString(MainSquakerActivity.COL_NUM_AUTHOR)
-        val authorKey = mData!!.getString(MainSquakerActivity.COL_NUM_AUTHOR_KEY)
+        val message = mData?.getString(MainSquakerActivity.COL_NUM_MESSAGE)
+        val author = mData?.getString(MainSquakerActivity.COL_NUM_AUTHOR)
+        val authorKey = mData?.getString(MainSquakerActivity.COL_NUM_AUTHOR_KEY)
 
         // Get the date for displaying
         val dateMillis = mData!!.getLong(MainSquakerActivity.COL_NUM_DATE)

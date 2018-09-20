@@ -49,6 +49,8 @@ class SquawkFirebaseMessageService : FirebaseMessagingService() {
         Log.e("NEW_TOKEN", s)
     }
 
+
+
     /**
      * Called when message is received.
      *

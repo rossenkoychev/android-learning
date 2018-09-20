@@ -10,19 +10,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceManager
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.rossen.androidadvancedlearning.R
-import com.example.rossen.androidadvancedlearning.squaker_cloud.fcm.SquawkFirebaseMessageService
 import com.example.rossen.androidadvancedlearning.squaker_cloud.following.FollowingPreferenceActivity
 import com.example.rossen.androidadvancedlearning.squaker_cloud.provider.SquawkContract
 import com.example.rossen.androidadvancedlearning.squaker_cloud.provider.SquawkProvider
 import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.internal.FirebaseAppHelper.getToken
-import com.google.firebase.iid.InstanceIdResult
-import com.google.android.gms.tasks.OnSuccessListener
+
 import kotlinx.android.synthetic.main.squawker_activity_main.*
 
 
@@ -40,7 +36,7 @@ class MainSquakerActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
 squawks_recycler_view.setHasFixedSize(true)
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-      //  mRecyclerView.setHasFixedSize(true)
+        squawks_recycler_view.setHasFixedSize(true)
 
         // Use a linear layout manager
         mLayoutManager = LinearLayoutManager(this)
@@ -58,6 +54,11 @@ squawks_recycler_view.setHasFixedSize(true)
 
         // Start the loader
         supportLoaderManager.initLoader(LOADER_ID_MESSAGES, null, this)
+
+
+
+        var extras:Bundle?=intent.extras
+       Log.d(LOG_TAG, "Contains ${extras?.getString("test")}")
 
         // Get token from the ID Service you created and show it in a log
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this@MainSquakerActivity) { instanceIdResult ->
