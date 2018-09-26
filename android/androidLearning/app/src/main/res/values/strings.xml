@@ -44,4 +44,14 @@
     <string name="follow_summary_following">Following</string>
     <string name="go_to_firebase_messages_button_text">go to firebase messages</string>
     <string name="no_desctiption">no desctiption</string>
+
+    //section shushme (places)
+    <string name="add_new_location">Add new location</string>
+    <string name="location_list">Locations</string>
+    <string name="setting_enabled" translatable="false">EnabledSetting</string>
+    <string name="settings_label">Settings</string>
+    <string name="enable_geofences">Enable Geofences</string>
+    <string name="go_to_places_button_text">go to places</string>
+    <string name="enter_name_edittext">enter name</string>
+    <string name="add_user_text">add user</string>
 </resources>

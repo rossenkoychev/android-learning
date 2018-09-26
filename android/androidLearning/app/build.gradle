@@ -46,13 +46,32 @@ dependencies {
     //section fire cloud messaging
     // Schematic dependencies for ContentProvider
     annotationProcessor 'net.simonvt.schematic:schematic-compiler:0.6.3'
-    compile 'net.simonvt.schematic:schematic:0.6.3'
+    implementation 'net.simonvt.schematic:schematic:0.6.3'
+
+
+    // RxJava support for Room
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+    // Testing support
+    androidTestImplementation 'android.arch.core:core-testing:1.1.1'
+
+    // Architecture components
+    implementation "android.arch.lifecycle:runtime:$archLifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    implementation "android.arch.lifecycle:common-java8:$archLifecycleVersion"
+    implementation "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
+
+
+    implementation "android.arch.persistence.room:runtime:$archLifecycleVersion"
+    implementation "android.arch.persistence.room:compiler:$archLifecycleVersion"
+    implementation "android.arch.persistence.room:rxjava2:$archLifecycleVersion"
+    implementation "android.arch.persistence.room:testing:$archLifecycleVersion"
 
     // Firebase dependency
-    compile 'com.google.firebase:firebase-messaging:17.3.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.1'
 
     // Preferences Dependencies
-    compile 'com.android.support:preference-v7:27.1.1'
+    implementation 'com.android.support:preference-v7:27.1.1'
 }
 kapt {
     generateStubs = true

@@ -38,6 +38,8 @@
         <activity android:name=".libraries.EmojifyMeActivity"/>
         <activity android:name=".squaker_cloud.MainSquakerActivity"/>
         <activity android:name=".squaker_cloud.following.FollowingPreferenceActivity" />
+        <activity android:name=".shush_me.ShushMainActivity" />
+        <activity android:name=".users.UserActivity" />
 
         <service android:name=".squaker_cloud.fcm.SquawkFirebaseMessageService" >
         <intent-filter>
