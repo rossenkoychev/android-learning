@@ -7,6 +7,7 @@ import android.util.Log
 import com.example.rossen.androidadvancedlearning.R
 import com.example.rossen.androidadvancedlearning.fragments.ui.MainFragmentsActivity
 import com.example.rossen.androidadvancedlearning.libraries.EmojifyMeActivity
+import com.example.rossen.androidadvancedlearning.mvp.MVPMainActivity
 import com.example.rossen.androidadvancedlearning.shush_me.ShushMainActivity
 import com.example.rossen.androidadvancedlearning.squaker_cloud.MainSquakerActivity
 import kotlinx.android.synthetic.main.main_activity.*
@@ -34,6 +35,11 @@ class MainActivity : Activity() {
 
         places_button.setOnClickListener {
             val placesIntent = Intent(this, ShushMainActivity::class.java)
+            startActivity(placesIntent)
+        }
+
+        mvp_button.setOnClickListener {
+            val placesIntent = Intent(this, MVPMainActivity::class.java)
             startActivity(placesIntent)
         }
     }

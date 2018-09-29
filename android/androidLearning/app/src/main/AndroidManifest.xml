@@ -40,6 +40,7 @@
         <activity android:name=".squaker_cloud.following.FollowingPreferenceActivity" />
         <activity android:name=".shush_me.ShushMainActivity" />
         <activity android:name=".users.UserActivity" />
+        <activity android:name=".mvp.MVPMainActivity" />
 
         <service android:name=".squaker_cloud.fcm.SquawkFirebaseMessageService" >
         <intent-filter>
