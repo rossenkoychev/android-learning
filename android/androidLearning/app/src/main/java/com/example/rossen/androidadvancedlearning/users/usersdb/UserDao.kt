@@ -16,6 +16,7 @@
 
 package com.example.rossen.androidadvancedlearning.users.usersdb
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -40,7 +41,7 @@ interface UserDao {
 
 
     @Query("SELECT * FROM users")
-    fun getUsers():Flowable<User>
+    fun getUsers(): LiveData<List<User>>
     /**
      * Insert a user in the database. If the user already exists, replace it.
 

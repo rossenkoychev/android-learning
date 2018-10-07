@@ -16,7 +16,7 @@ class MVVMMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mvvm_main_activity_layout)
-viewModel=obtainV
+        viewModel = ViewModelProviders.of(this).get(MVVMMainViewModel::class.java)
 
 
         addUserButton.setOnClickListener {
@@ -26,13 +26,6 @@ viewModel=obtainV
         playerEditText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) KeyboardUtils.hideKeyboard(view, this)
         }
-    }
-
-    fun obtainViewModel(activity: FragmentActivity): MVVMMainViewModel {
-        // Use a Factory to inject dependencies into the ViewModel
-        val factory = ViewModelFactory.getInstance(activity.application)
-
-        return ViewModelProviders.of(activity, factory).get(TasksViewModel::class.java!!)
     }
 
 }
